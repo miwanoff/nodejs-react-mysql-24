@@ -2,24 +2,20 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
 
-
 const app = express();
 app.use(cors());
 app.use(express.json());
-
 
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "nodeschool",
+  database: "nodeschool24",
 });
-
 
 app.get("/", (req, res) => {
   return res.json("Home");
 });
-
 
 app.get("/students", (req, res) => {
   const sql = "SELECT * FROM students";
@@ -28,7 +24,6 @@ app.get("/students", (req, res) => {
     return res.json(data);
   });
 });
-
 
 app.post("/users", (req, res) => {
   //const sql = "SELECT * FROM users";
@@ -39,7 +34,6 @@ app.post("/users", (req, res) => {
     req.body.password +
     "'";
   console.log(sql);
-
 
   db.query(sql, (err, data) => {
     // if (err) return res.json(err);
@@ -54,7 +48,6 @@ app.post("/users", (req, res) => {
     }
   });
 });
-
 
 app.listen(3001, () => {
   console.log("Listening...");
